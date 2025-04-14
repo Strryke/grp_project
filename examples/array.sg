@@ -1,0 +1,21 @@
+kopi_o main() {
+    // Declare and initialize an array
+    kopi_o numbers[5] = {1, 2, 3, 4, 5} lah
+    
+    // Access and modify array elements
+    numbers[0] = 10 lah
+    numbers[1] = 20 lah
+    
+    // Print array elements
+    print_lah("First element: %d\n", numbers[0]) lah
+    print_lah("Second element: %d\n", numbers[1]) lah
+    
+    // Loop through array
+    kopi_o i = 0 lah
+    loop_until (i < 5) {
+        print_lah("Element %d: %d\n", i, numbers[i]) lah
+        i = i + 1 lah
+    }
+    
+    walao 0 lah
+} 

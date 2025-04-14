@@ -59,6 +59,3 @@ fi
 echo "Running the program..."
 echo "-------------------"
 "$OUTPUT_BIN"
-
-# Note: Generated files are kept in the outputs directory
-# To clean up, simply delete the outputs directory: rm -rf outputs 

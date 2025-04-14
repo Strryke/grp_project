@@ -16,26 +16,20 @@ typedef enum {
 
 // Token types
 typedef enum {
-    TOKEN_EOF = 0,
-    TOKEN_IDENTIFIER,
-    TOKEN_NUMBER,
-    TOKEN_STRING,
-    TOKEN_LAH,          // lah (statement terminator)
+    // Keywords
     TOKEN_KOPI_O,       // int
     TOKEN_TEH_O,        // float
     TOKEN_CHAR_KWAY,    // char
+    TOKEN_LAH,          // lah (statement terminator)
     TOKEN_CAN,          // if
     TOKEN_CANNOT,       // else
     TOKEN_WALAO,        // return
     TOKEN_PRINT_LAH,    // printf
     TOKEN_LOOP_UNTIL,   // while
     TOKEN_FOR_WHAT,     // for
-    TOKEN_LPAREN,       // (
-    TOKEN_RPAREN,       // )
-    TOKEN_LBRACE,       // {
-    TOKEN_RBRACE,       // }
-    TOKEN_COMMA,        // ,
-    TOKEN_SEMICOLON,    // ;
+    TOKEN_ARRAY,        // array
+    
+    // Operators
     TOKEN_EQUALS,       // =
     TOKEN_PLUS,         // +
     TOKEN_MINUS,        // -
@@ -46,7 +40,26 @@ typedef enum {
     TOKEN_LESS_EQUAL,   // <=
     TOKEN_GREATER_EQUAL,// >=
     TOKEN_EQUAL_EQUAL,  // ==
-    TOKEN_NOT_EQUAL     // !=
+    TOKEN_NOT_EQUAL,    // !=
+    
+    // Punctuation
+    TOKEN_LPAREN,       // (
+    TOKEN_RPAREN,       // )
+    TOKEN_LBRACE,       // {
+    TOKEN_RBRACE,       // }
+    TOKEN_LBRACKET,     // [
+    TOKEN_RBRACKET,     // ]
+    TOKEN_COMMA,        // ,
+    TOKEN_SEMICOLON,    // ;
+    
+    // Literals
+    TOKEN_NUMBER,       // 123
+    TOKEN_STRING,       // "hello"
+    TOKEN_IDENTIFIER,   // variable names
+    
+    // Special
+    TOKEN_EOF,          // end of file
+    TOKEN_ERROR         // error token
 } TokenType;
 
 // Function declarations

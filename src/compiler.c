@@ -33,6 +33,20 @@ void print_error(const char* message, int line, int column) {
 
 // Convert Singlish token to C equivalent
 static void write_token(FILE* out, Token* token, Token* next_token, Token* prev_token) {
+    // Special handling for array declarations
+    if (token->type == TOKEN_LBRACKET && 
+        prev_token && prev_token->type == TOKEN_IDENTIFIER) {
+        fprintf(out, "[");
+        return;
+    }
+
+    // Special handling for array access
+    if (token->type == TOKEN_IDENTIFIER && 
+        next_token && next_token->type == TOKEN_LBRACKET) {
+        fprintf(out, "%s", token->value);
+        return;
+    }
+
     // Special handling for function declarations
     if (token->type == TOKEN_IDENTIFIER && 
         prev_token && prev_token->type == TOKEN_KOPI_O &&
@@ -136,6 +150,12 @@ static void write_token(FILE* out, Token* token, Token* next_token, Token* prev_
         case TOKEN_COMMA:
             fprintf(out, ",");
             break;
+        case TOKEN_LBRACKET:
+            fprintf(out, "[");
+            break;
+        case TOKEN_RBRACKET:
+            fprintf(out, "]");
+            break;
         default:
             // Skip unknown tokens
             break;
@@ -145,6 +165,8 @@ static void write_token(FILE* out, Token* token, Token* next_token, Token* prev_
     if (token->type != TOKEN_LAH && 
         token->type != TOKEN_LPAREN &&
         token->type != TOKEN_LBRACE &&
+        token->type != TOKEN_LBRACKET &&
+        token->type != TOKEN_RBRACKET &&
         token->type != TOKEN_LESS &&
         token->type != TOKEN_GREATER &&
         token->type != TOKEN_LESS_EQUAL &&

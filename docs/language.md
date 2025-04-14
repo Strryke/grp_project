@@ -15,11 +15,43 @@
 
 ### Data Types
 
+### Basic Types
+
+- `kopi_o` - Integer type
+- `teh_o` - Float type
+- `char_kway` - Character type
+
+### Arrays
+
+Arrays are fixed-size collections of elements of the same type.
+
+#### Declaration
+
 ```c
-kopi_o x = 42 lah          // Integer
-teh_o y = 3.14 lah         // Float
-char_kway c = 'A' lah      // Character
+kopi_o numbers[5] lah        // Array of 5 integers
+teh_o prices[10] lah         // Array of 10 floats
+char_kway letters[26] lah    // Array of 26 characters
 ```
+
+#### Initialization
+
+```c
+kopi_o numbers[5] = {1, 2, 3, 4, 5} lah
+teh_o prices[3] = {1.99, 2.99, 3.99} lah
+```
+
+#### Accessing Elements
+
+```c
+numbers[0] = 10 lah          // Set first element
+kopi_o x = numbers[1] lah    // Get second element
+```
+
+#### Array Bounds
+
+- Array indices start at 0
+- Accessing elements beyond array bounds is undefined behavior
+- Array size must be a constant expression
 
 ### Control Structures
 
