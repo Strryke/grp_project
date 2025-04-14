@@ -28,6 +28,8 @@ typedef enum {
     TOKEN_CANNOT,       // else
     TOKEN_WALAO,        // return
     TOKEN_PRINT_LAH,    // printf
+    TOKEN_LOOP_UNTIL,   // while
+    TOKEN_FOR_WHAT,     // for
     TOKEN_LPAREN,       // (
     TOKEN_RPAREN,       // )
     TOKEN_LBRACE,       // {
@@ -39,6 +41,12 @@ typedef enum {
     TOKEN_MINUS,        // -
     TOKEN_STAR,         // *
     TOKEN_SLASH,        // /
+    TOKEN_LESS,         // <
+    TOKEN_GREATER,      // >
+    TOKEN_LESS_EQUAL,   // <=
+    TOKEN_GREATER_EQUAL,// >=
+    TOKEN_EQUAL_EQUAL,  // ==
+    TOKEN_NOT_EQUAL     // !=
 } TokenType;
 
 // Function declarations

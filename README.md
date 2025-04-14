@@ -23,6 +23,31 @@ kopi_o main() {
 
 ### Compile and Run
 
+You have two options to compile and run your Singlish-C programs:
+
+#### Option 1: Using the build script (Recommended)
+
+The easiest way to compile and run your programs is using the `build_and_run.sh` script:
+
+```bash
+# Make the script executable
+chmod +x build_and_run.sh
+
+# Run your program
+./build_and_run.sh examples/hello.sg
+```
+
+This will automatically:
+
+1. Build the compiler if needed
+2. Transpile your Singlish-C code to C
+3. Compile the generated C code
+4. Run the resulting program
+
+#### Option 2: Manual Compilation
+
+If you prefer to do it step by step:
+
 ```bash
 # Transpile to C
 ./singlish-c hello.sg -o hello.c
@@ -45,7 +70,8 @@ singlish-c/
 │   ├── codegen/    # C code generation
 │   └── main.c
 ├── include/        # Header files
-└── examples/       # Example programs
+├── examples/       # Example programs
+└── build_and_run.sh # Quick build and run script
 ```
 
 ## Language Features
@@ -60,6 +86,8 @@ Basic syntax:
 - `char_kway` for characters
 - `can`/`cannot` for if/else
 - `print_lah` for output
+- `loop_until` for while loops
+- `for_what` for for loops
 
 ## Example Programs
 
@@ -68,3 +96,4 @@ Check the `examples/` directory for sample programs, including:
 - Hello World
 - Simple Calculator
 - Basic Control Structures
+- Loop Examples

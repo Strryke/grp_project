@@ -1,0 +1,8 @@
+kopi_o main() {
+    kopi_o i = 0 lah
+    loop_until (i < 5) {
+        print_lah("Count: %d\n", i) lah
+        i = i + 1 lah
+    }
+    walao 0 lah
+} 

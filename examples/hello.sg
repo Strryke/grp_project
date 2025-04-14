@@ -1,5 +1,5 @@
 // Hello World in Singlish-C
 kopi_o main() {
-    print_lah("Hello Singapura! Testing to see if this works") lah
+    print_lah("Hello Singapura! Testing to see if this works, seems like it works?") lah
     walao 0 lah
 } 

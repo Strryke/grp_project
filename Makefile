@@ -2,7 +2,8 @@ CC = gcc
 CFLAGS = -Wall -Wextra -I./include
 SRCDIR = src
 BUILDDIR = build
-TARGET = singlish-c
+OUTPUTS_DIR = outputs
+TARGET = $(OUTPUTS_DIR)/singlish-c
 
 # Source files
 SOURCES = $(wildcard $(SRCDIR)/*.c) \
@@ -15,7 +16,7 @@ SOURCES = $(wildcard $(SRCDIR)/*.c) \
 OBJECTS = $(SOURCES:$(SRCDIR)/%.c=$(BUILDDIR)/%.o)
 
 # Make sure the build directory exists
-$(shell mkdir -p $(sort $(dir $(OBJECTS))))
+$(shell mkdir -p $(sort $(dir $(OBJECTS))) $(OUTPUTS_DIR))
 
 # Default target
 all: $(TARGET)
@@ -30,6 +31,6 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.c
 
 # Clean
 clean:
-	rm -rf $(BUILDDIR) $(TARGET)
+	rm -rf $(BUILDDIR) $(OUTPUTS_DIR)
 
 .PHONY: all clean 

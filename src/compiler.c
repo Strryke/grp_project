@@ -41,6 +41,19 @@ static void write_token(FILE* out, Token* token, Token* next_token, Token* prev_
         return;
     }
 
+    // Special handling for for loops
+    if (token->type == TOKEN_LAH && 
+        prev_token && prev_token->type != TOKEN_RPAREN &&
+        next_token && next_token->type != TOKEN_RBRACE) {
+        // Inside a for loop condition, use semicolon
+        if (next_token->type == TOKEN_RPAREN) {
+            // Don't add semicolon before closing parenthesis
+            return;
+        }
+        fprintf(out, ";");
+        return;
+    }
+
     switch (token->type) {
         case TOKEN_KOPI_O:
             fprintf(out, "int");
@@ -59,6 +72,12 @@ static void write_token(FILE* out, Token* token, Token* next_token, Token* prev_
             break;
         case TOKEN_LAH:
             fprintf(out, ";");
+            break;
+        case TOKEN_LOOP_UNTIL:
+            fprintf(out, "while");
+            break;
+        case TOKEN_FOR_WHAT:
+            fprintf(out, "for");
             break;
         case TOKEN_STRING:
             fprintf(out, "\"%s\"", token->value);
@@ -81,6 +100,42 @@ static void write_token(FILE* out, Token* token, Token* next_token, Token* prev_
         case TOKEN_NUMBER:
             fprintf(out, "%s", token->value);
             break;
+        case TOKEN_LESS:
+            fprintf(out, "<");
+            break;
+        case TOKEN_GREATER:
+            fprintf(out, ">");
+            break;
+        case TOKEN_LESS_EQUAL:
+            fprintf(out, "<=");
+            break;
+        case TOKEN_GREATER_EQUAL:
+            fprintf(out, ">=");
+            break;
+        case TOKEN_EQUAL_EQUAL:
+            fprintf(out, "==");
+            break;
+        case TOKEN_NOT_EQUAL:
+            fprintf(out, "!=");
+            break;
+        case TOKEN_EQUALS:
+            fprintf(out, "=");
+            break;
+        case TOKEN_PLUS:
+            fprintf(out, "+");
+            break;
+        case TOKEN_MINUS:
+            fprintf(out, "-");
+            break;
+        case TOKEN_STAR:
+            fprintf(out, "*");
+            break;
+        case TOKEN_SLASH:
+            fprintf(out, "/");
+            break;
+        case TOKEN_COMMA:
+            fprintf(out, ",");
+            break;
         default:
             // Skip unknown tokens
             break;
@@ -90,6 +145,18 @@ static void write_token(FILE* out, Token* token, Token* next_token, Token* prev_
     if (token->type != TOKEN_LAH && 
         token->type != TOKEN_LPAREN &&
         token->type != TOKEN_LBRACE &&
+        token->type != TOKEN_LESS &&
+        token->type != TOKEN_GREATER &&
+        token->type != TOKEN_LESS_EQUAL &&
+        token->type != TOKEN_GREATER_EQUAL &&
+        token->type != TOKEN_EQUAL_EQUAL &&
+        token->type != TOKEN_NOT_EQUAL &&
+        token->type != TOKEN_EQUALS &&
+        token->type != TOKEN_PLUS &&
+        token->type != TOKEN_MINUS &&
+        token->type != TOKEN_STAR &&
+        token->type != TOKEN_SLASH &&
+        token->type != TOKEN_COMMA &&
         (next_token && next_token->type != TOKEN_RPAREN && 
          next_token->type != TOKEN_LAH && 
          next_token->type != TOKEN_LBRACE)) {

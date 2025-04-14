@@ -1,0 +1,6 @@
+kopi_o main() {
+    for_what (kopi_o i = 0 lah i < 5 lah i = i + 1 lah) {
+        print_lah("Count: %d\n", i) lah
+    }
+    walao 0 lah
+} 

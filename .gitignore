@@ -1,0 +1,13 @@
+# Build artifacts
+build/
+singlish-c
+
+# Generated outputs
+outputs/
+*.c
+*.o
+*.exe
+
+# OS specific
+.DS_Store
+.vscode/ 

@@ -89,6 +89,8 @@ static TokenType get_keyword_type(const char* identifier) {
     if (strcmp(identifier, "print_lah") == 0) return TOKEN_PRINT_LAH;
     if (strcmp(identifier, "walao") == 0) return TOKEN_WALAO;
     if (strcmp(identifier, "lah") == 0) return TOKEN_LAH;
+    if (strcmp(identifier, "loop_until") == 0) return TOKEN_LOOP_UNTIL;
+    if (strcmp(identifier, "for_what") == 0) return TOKEN_FOR_WHAT;
     return TOKEN_IDENTIFIER;
 }
 
@@ -111,6 +113,44 @@ start:
     token->column = lexer->column;
 
     char current = lexer->source[lexer->position];
+    char next = lexer->source[lexer->position + 1];
+
+    // Handle comparison operators
+    if (current == '<' || current == '>' || current == '=' || current == '!') {
+        if (next == '=') {
+            // Two-character operators
+            token->value = (char*)malloc(3);
+            token->value[0] = current;
+            token->value[1] = '=';
+            token->value[2] = '\0';
+            
+            switch (current) {
+                case '<': token->type = TOKEN_LESS_EQUAL; break;
+                case '>': token->type = TOKEN_GREATER_EQUAL; break;
+                case '=': token->type = TOKEN_EQUAL_EQUAL; break;
+                case '!': token->type = TOKEN_NOT_EQUAL; break;
+            }
+            
+            lexer->position += 2;
+            lexer->column += 2;
+            return token;
+        } else {
+            // Single-character operators
+            token->value = (char*)malloc(2);
+            token->value[0] = current;
+            token->value[1] = '\0';
+            
+            switch (current) {
+                case '<': token->type = TOKEN_LESS; break;
+                case '>': token->type = TOKEN_GREATER; break;
+                case '=': token->type = TOKEN_EQUALS; break;
+            }
+            
+            lexer->position++;
+            lexer->column++;
+            return token;
+        }
+    }
 
     // Handle string literals
     if (current == '"') {
@@ -155,12 +195,17 @@ start:
             token->type = TOKEN_COMMA;
             token->value = strdup(",");
             return token;
-        case '0': case '1': case '2': case '3': case '4':
-        case '5': case '6': case '7': case '8': case '9':
-            token->type = TOKEN_NUMBER;
-            token->value = (char*)malloc(2);
-            token->value[0] = current;
-            token->value[1] = '\0';
+        case '+':
+            token->type = TOKEN_PLUS;
+            token->value = strdup("+");
+            return token;
+        case '-':
+            token->type = TOKEN_MINUS;
+            token->value = strdup("-");
+            return token;
+        case '*':
+            token->type = TOKEN_STAR;
+            token->value = strdup("*");
             return token;
         case '/':
             if (lexer->source[lexer->position] == '/') {
@@ -168,7 +213,16 @@ start:
                 free(token);
                 goto start;
             }
-            // Fall through to default if not a comment
+            token->type = TOKEN_SLASH;
+            token->value = strdup("/");
+            return token;
+        case '0': case '1': case '2': case '3': case '4':
+        case '5': case '6': case '7': case '8': case '9':
+            token->type = TOKEN_NUMBER;
+            token->value = (char*)malloc(2);
+            token->value[0] = current;
+            token->value[1] = '\0';
+            return token;
         default:
             if (isspace(current)) {
                 free(token);
