@@ -1,99 +1,64 @@
-# Singlish-C Transpiler
+# Singlish-C Compiler
 
-A transpiler that converts Singlish-based programming language to standard C code. Write your programs using familiar Singlish expressions!
+A compiler for the Singlish-C programming language, which transpiles Singlish-C code to C.
 
 ## Quick Start
 
-### Build the Transpiler
+### Prerequisites
+
+- GCC compiler
+- Make
+
+### Building
 
 ```bash
+# Build the compiler
 make
+
+# Clean build artifacts
+make clean
 ```
 
-### Write Your First Program
+### Running Programs
 
-Create a file `hello.sg` with:
-
-```
-kopi_o main() {
-    print_lah("Hello lah!") lah
-    walao 0 lah
-}
-```
-
-### Compile and Run
-
-You have two options to compile and run your Singlish-C programs:
-
-#### Option 1: Using the build script (Recommended)
-
-The easiest way to compile and run your programs is using the `build_and_run.sh` script:
+1. Write your Singlish-C program (e.g., `hello.sg`)
+2. Use the build script:
 
 ```bash
-# Make the script executable
-chmod +x build_and_run.sh
-
-# Run your program
-./build_and_run.sh examples/hello.sg
-```
-
-This will automatically:
-
-1. Build the compiler if needed
-2. Transpile your Singlish-C code to C
-3. Compile the generated C code
-4. Run the resulting program
-
-#### Option 2: Manual Compilation
-
-If you prefer to do it step by step:
-
-```bash
-# Transpile to C
-./singlish-c hello.sg -o hello.c
-
-# Compile the generated C code
-gcc hello.c -o hello
-
-# Run your program
-./hello
+./build_and_run.sh hello.sg
 ```
 
 ## Project Structure
 
 ```
-singlish-c/
-├── src/
-│   ├── common/     # Shared utilities
-│   ├── lexer/      # Tokenization
-│   ├── parser/     # Syntax analysis
-│   ├── codegen/    # C code generation
-│   └── main.c
-├── include/        # Header files
-├── examples/       # Example programs
-└── build_and_run.sh # Quick build and run script
+.
+├── build_and_run.sh    # Script to build and run programs
+├── Makefile           # Build configuration
+├── src/               # Source code
+│   ├── lexer/        # Lexical analysis
+│   ├── parser/       # Syntax analysis
+│   ├── codegen/      # Code generation
+│   └── common/       # Common utilities
+├── include/          # Header files
+├── examples/         # Example programs
+├── outputs/          # Generated files
+└── docs/            # Documentation
+    └── language.md   # Language specification
 ```
 
-## Language Features
+## Documentation
 
-See [docs/prd.md](docs/prd.md) for complete language specification.
+- [Language Specification](docs/language.md) - Detailed language features and syntax
+- Example programs in `examples/` directory
 
-Basic syntax:
+## Contributing
 
-- Use `lah` as statement terminator
-- `kopi_o` for integers
-- `teh_o` for floats
-- `char_kway` for characters
-- `can`/`cannot` for if/else
-- `print_lah` for output
-- `loop_until` for while loops
-- `for_what` for for loops
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
 
-## Example Programs
+## License
 
-Check the `examples/` directory for sample programs, including:
-
-- Hello World
-- Simple Calculator
-- Basic Control Structures
-- Loop Examples
+MIT License
